@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam schedule Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exam-table">Exam
+        Table pop-up</button>
+
+    <div class="modal fade" id="exam-table" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" id="myLargeModalLabel">
+            <div class="modal-content">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>8:00am to 11:00am * Except Sat</th>
+                            <th>12:00pm to 3:00pm * Except Sat</th>
+                            <th>4:00pm to 7:00pm</th>
+                            <th>8:00pm to 11:00pm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Thursday, 5/5</th>
+                            <td>MTh3, TF3, & Language Group D</td>
+                            <td>Math Group F</td>
+                            <td>TTh7 & Th only 6pm or later, & Math Group B</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Friday, 5/6</th>
+                            <td>TTh4, TTh5, MW6, & Biology Group J</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Saturday * 5/7</th>
+                            <td>9am-12pm & Language Group Q</td>
+                            <td>1pm-4pm & Exam Code T (Online-Async)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Sunday 5/8</th>
+                            <td colspan="3">Exam Code T (Online-Async)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Monday 5/9</th>
+                            <td>MTh2 & W1/F6 Chemistry Group G, Computer Science Group M, MW7, & M only 6pm or later, &
+                                Biology Lab
+                                L</td>
+                            <td colspan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Tuesday 5/10</th>
+                            <td>TF1, W3/F4, MW4, Physics Group I, & W2/F5</td>
+                            <td></td>
+                            <td>Exam Code T (Online-Async)</td>
+                            <td>MTh1 & TTh8 & T only 6pm or later & Chem Lab H</td>
+                        </tr>
+                        <tr>
+                            <th>Wednesday 5/11</th>
+                            <td>TF2, MW5, TTh6, MW8, & W only 6pm or later</td>
+                            <td colspan="2">Exam Code T (Online-Async)</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
