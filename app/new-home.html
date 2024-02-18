@@ -1,0 +1,159 @@
+<head>
+    <style>
+        body {
+            margin: 0;
+            background-color: #3a3a3a;
+        }
+    </style>
+
+    <script src="//unpkg.com/force-graph"></script>
+
+    <style>
+        .clickable {
+            cursor: unset !important
+        }
+    </style>
+</head>
+
+<body>
+    <div id="graph"></div>
+
+    <script>
+        const rootId = 0;
+        const names = [
+            'Home',
+            'Settings',
+            'Personal',
+            'Education',
+            'Room booking',
+            'Dormitory booking',
+            'Health',
+            'Transportation',
+            'Library',
+            'Profile',
+            'Card',
+            'Bank',
+            'Enroll',
+            'Schedule',
+            'Exam',
+            'Inform',
+            'Transcript',
+            'Study room',
+            'Entertainment room',
+            'Booking Status',
+            'Dorm booking',
+            'Service',
+            'Repairing',
+            'Cleaning',
+            'Change a room',
+            'Mental health',
+            'Body health',
+            'Campus Bus',
+            'Public Bus',
+            'Book reservation',
+            'Book Tracking',
+            'My Booking'
+        ];
+
+        // Random tree with custom node names
+        const N = 32;
+        const gData = {
+            nodes: Array.from({ length: N }, (_, i) => ({
+                id: i,
+                collapsed: i !== rootId,
+                childLinks: [],
+                name: names[i]
+            })),
+            links: [
+                // Links from node 0 to nodes 1-7
+                ...Array.from({ length: 8 }, (_, i) => ({
+                    source: 0,
+                    target: i + 1
+                })),
+                // Links from node 0 to nodes 1-5
+                ...Array.from({ length: 3 }, (_, i) => ({
+                    source: 2,
+                    target: i + 9
+                })),
+                ...Array.from({ length: 5 }, (_, i) => ({
+                    source: 3,
+                    target: i + 12
+                })),
+                ...Array.from({ length: 3 }, (_, i) => ({
+                    source: 4,
+                    target: i + 17
+                })),
+                ...Array.from({ length: 2 }, (_, i) => ({
+                    source: 5,
+                    target: i + 20
+                })),
+                ...Array.from({ length: 3 }, (_, i) => ({
+                    source: 21,
+                    target: i + 22
+                })),
+                ...Array.from({ length: 2 }, (_, i) => ({
+                    source: 6,
+                    target: i + 25
+                })),
+                ...Array.from({ length: 2 }, (_, i) => ({
+                    source: 7,
+                    target: i + 27
+                })),
+                ...Array.from({ length: 3 }, (_, i) => ({
+                    source: 8,
+                    target: i + 29
+                })),
+            ]
+        };
+
+        // link parent/children
+        const nodesById = Object.fromEntries(gData.nodes.map(node => [node.id, node]));
+        gData.links.forEach(link => {
+            nodesById[link.source].childLinks.push(link);
+        });
+
+        const getPrunedTree = () => {
+            const visibleNodes = [];
+            const visibleLinks = [];
+
+            (function traverseTree(node = nodesById[rootId]) {
+                visibleNodes.push(node);
+                if (node.collapsed) return;
+                visibleLinks.push(...node.childLinks);
+                node.childLinks
+                    .map(link => ((typeof link.target) === 'object') ? link.target : nodesById[link.target]) // get child node
+                    .forEach(traverseTree);
+            })(); // IIFE
+
+            return { nodes: visibleNodes, links: visibleLinks };
+        };
+
+        const elem = document.getElementById('graph');
+        const Graph = ForceGraph()(elem)
+            .graphData(getPrunedTree())
+            .onNodeHover(node => elem.style.cursor = node && node.childLinks.length ? 'pointer' : null)
+            .onNodeClick(node => {
+                if (node.childLinks.length) {
+                    node.collapsed = !node.collapsed; // toggle collapse state
+                    Graph.graphData(getPrunedTree());
+                }
+            })
+            .linkDirectionalParticles(1)
+            .linkDirectionalParticleWidth(2.5)
+            .nodeCanvasObject((node, ctx, globalScale) => {
+                // Draw node circle
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI, false);
+                ctx.fillStyle = '#d9d9d9';
+                ctx.fill();
+
+                // Draw node name
+                ctx.font = `3.5px 'Niramit', sans-serif`;
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(node.name, node.x, node.y);
+            })
+            .nodeColor(node => !node.childLinks.length ? 'green' : node.collapsed ? 'red' : 'yellow');
+    </script>
+</body>

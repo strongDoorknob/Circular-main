@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reservation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional CSS styles */
+        .modal-header {
+            display: block;
+        }
+
+        .modal-header h5 {
+            display: inline-block;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookReservationModal">
+        Lend your book here!!
+    </button>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myBookingsModal">
+        My Bookings
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bookReservationModal" tabindex="-1" role="dialog"
+        aria-labelledby="bookReservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookReservationModalLabel">Available Books</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>เลขหนังสือ</th>
+                                <th>ชื่อหนังสือ</th>
+                                <th>ผู้เขียน</th>
+                                <th>สถานะ</th>
+                                <th>รายละเอียดเบื้องต้น</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sample data, replace with dynamic data if needed -->
+                            <tr>
+                                <td>1</td>
+                                <td>101</td>
+                                <td>"HTML & CSS: Design and Build Websites"</td>
+                                <td>Jon Duckett</td>
+                                <td>Available</td>
+                                <td>Book for Fundamental HTML lessons</td>
+                                <td>
+                                    <button class="btn btn-success reserve-btn" data-toggle="modal" data-target="#roomDetailModal">Book</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>201</td>
+                                <td>"Penetration Testing: A Hands-On Introduction to Hacking"</td>
+                                <td>Georgia Weidman</td>
+                                <td>Available</td>
+                                <td>Books for Penetration Testing</td>
+                                <td>
+                                    <button class="btn btn-success reserve-btn" data-toggle="modal" data-target="#roomDetailModal">Book</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>203</td>
+                                <td>"The Basics of Hacking and Penetration Testing: Ethical Hacking and Penetration Testing Made Easy"</td>
+                                <td>หอพัก C06</td>
+                                <td>Available</td>
+                                <td>The basics of Hacking lessons</td>
+                                <td>
+                                    <button class="btn btn-success reserve-btn" data-toggle="modal" data-target="#roomDetailModal">Book</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>304</td>
+                                <td>"Art and Sciences of Java; The first edition"</td>
+                                <td>Eric Roberts</td>
+                                <td>Available</td>
+                                <td>Learning for Java OOP operations</td>
+                                <td>
+                                    <button class="btn btn-success reserve-btn" data-toggle="modal" data-target="#roomDetailModal">Book</button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Modal for Room Details -->
+    <div class="modal fade" id="bookDetailModal" tabindex="-1" role="dialog" aria-labelledby="bookDetailModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookDetailModalLabel">Book Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="img/book-example.jpg" class="img-fluid" alt="Room Image">
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Select book reservation duration</h5>
+                            <div class="form-group">
+                                <select class="form-control" id="typeSlotSelect">
+                                    <option>24 Hours</option>
+                                    <option>48 Hours</option>
+                                    <option>72 Hours</option>
+                                    <option>1 Weeks</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="confirmReservationButton">Proceed booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myBookingsModal" tabindex="-1" role="dialog" aria-labelledby="myBookingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myBookingsModalLabel">My Bookings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>เลขหนังสือ</th>
+                                    <th>ชื่อหนังสือ</th>
+                                    <th>ยืมระยะเวลา</th>
+                                    <th>จองเมื่อ</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Sample data, replace with dynamic data if needed -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>"Jujutsu Kaisen Book 12"</td>
+                                    <td>72 Hours</td>
+                                    <td>12:56</td>
+                                    <td>
+                                        <button class="btn btn-danger" id="confirmDeleteButton">Cancel booking</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>"君の名は"</td>
+                                    <td>1 Weeks</td>
+                                    <td>13:00</td>
+                                    <td>
+                                        <button class="btn btn-danger" id="confirmDeleteButton">Cancel booking</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Event listener for reserve button
+            $('.reserve-btn').click(function () {
+                // Dynamically update modal content when reserve button is clicked
+                $('#bookDetailModal').modal('show');
+            });
+
+            // Event listener for confirming reservation
+            $('#confirmReservationButton').click(function () {
+                var selectedTypeSlot = $('#typeSlotSelect').val();
+                // You can implement reservation logic here
+                // For now, let's just display a message
+                alert('Your book has been booked for ' + selectedTypeSlot + '!!\nPlease return the book in time to prevent fine pricing.');
+                // Close the modal
+                $('#bookDetailModal').modal('hide');
+            });
+
+            $('#confirmDeleteButton').click(function () {
+                var selectedTimeSlot = $('#timeSlotSelect').val();
+                // You can implement reservation logic here
+                // For now, let's just display a message
+                alert('canceled');
+                // Close the modal
+                $('#myBookingsModal').modal('hide');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

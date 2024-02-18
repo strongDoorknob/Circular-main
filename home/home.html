@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="//unpkg.com/force-graph"></script>
+  <title>Home</title>
+  <style>
+    body {
+      background-color: #3d3a3a;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="graph-container"></div>
+  <script>
+    // Sample data for nodes and links
+    const nodes = [
+      { id: 1, label: 'Home' },
+      { id: 2, label: 'Log in', onClick: () => { window.location.href = '/Users/michio/Downloads/Circular/settings/settings.html';}},
+      // Add more nodes as needed
+    ];
+
+    const links = [
+      { source: 1, target: 2 },
+      // Add more links as needed
+    ];
+
+    // Create a ForceGraph instance
+    const graph = ForceGraph();
+
+    // Bind data to the graph
+    graph(document.getElementById('graph-container'))
+      .graphData({ nodes, links })
+      .nodeCanvasObject((node, ctx, globalScale) => {
+        const label = node.label || ''; // Access the label property of the node
+        const fontSize = 12 / globalScale; // Adjust font size based on global scale
+
+        // Draw node circle
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 8, 0, 2 * Math.PI, false);
+        ctx.fillStyle = '#d9d9d9';
+        ctx.fill();
+
+        // Draw text label
+        ctx.font = `${fontSize}px 'Inter', sans-serif`;
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, node.x, node.y);
+
+      })
+      .onNodeClick(function(d){
+        console.log(d)
+        window.location.href = 'settings/settings.html';}
+      )
+  </script>
+</body>
+
+</html>

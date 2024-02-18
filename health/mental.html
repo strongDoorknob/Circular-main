@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .myButton {
+            background-color: #ff7b7b;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .myButton:hover {
+            background-color: #ff5252;
+        }
+
+        .slide-fwd-center {
+            -webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        .slide-bck-center {
+            -webkit-animation: slide-bck-center 0.45s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+            animation: slide-bck-center 0.45s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+        }
+
+        @-webkit-keyframes slide-fwd-center {
+            0% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+
+            100% {
+                -webkit-transform: translateY(-10px);
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slide-fwd-center {
+            0% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+
+            100% {
+                -webkit-transform: translateY(-10px);
+                transform: translateY(-10px);
+            }
+        }
+
+        @-webkit-keyframes slide-bck-center {
+            0% {
+                -webkit-transform: translateY(-10px);
+                transform: translateY(-10px);
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-bck-center {
+            0% {
+                -webkit-transform: translateY(-10px);
+                transform: translateY(-10px);
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="myButton slide-fwd-center">Emergency</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let lastClickedButton = null;
+
+            document.querySelector('.myButton').addEventListener('click', function (event) {
+                if (lastClickedButton) {
+                    lastClickedButton.classList.remove('slide-fwd-center');
+                    lastClickedButton.classList.add('slide-bck-center');
+                }
+                event.target.classList.remove('slide-bck-center');
+                event.target.classList.add('slide-fwd-center');
+                lastClickedButton = event.target;
+            });
+        });
+    </script>
+</body>
+
+</html>
